@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Inscription</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'form-v1/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'form-v1/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'form-v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'form-v1/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'form-v1/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'form-v1/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'form-v1/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'form-v1/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'style/intlTelInput.css' %}" />
+<!--===============================================================================================-->
+</head>
+<body>
+	<div class="limiter">
+		<div class="container-login100">
+{#            <h3 style="margin-top: -5px;margin-bottom: -10px; font-style: oblique; text-align: center"><marquee direction = "left">KOLIA - CI, VOTRE PLATEFORME D'ENTRAIDE CONCUE PAR DES AFRICAINS POUR L'AFRIQUE</marquee></h3>#}
+			<div class="wrap-login100">
+{#                <h3 style="margin-top: -5px;margin-bottom: -10px; font-style: oblique; text-align: center"><marquee direction = "left">KOLIA - CI, VOTRE PLATEFORME D'ENTRAIDE CONCUE PAR DES AFRICAINS POUR L'AFRIQUE</marquee></h3>#}
+				<div class="login100-pic js-tilt" data-tilt style="margin-top: 50px">
+                    <h3 class="login100-form-title" style="margin-top: -5px; margin-bottom: -50px; text-align: center; color: white"><marquee direction = "left">KOLIA-CI, VOTRE PLATEFORME D'ENTRAIDE CONCUE PAR DES AFRICAINS POUR L'AFRIQUE</marquee></h3>
+					<img src="{% static 'form-v1/images/signup-image.jpg' %}" alt="IMG">
+				</div>
+{#                <h3 style="margin-top: -5px;margin-bottom: -10px; font-style: oblique; text-align: center"><marquee direction = "left">KOLIA - CI, VOTRE PLATEFORME D'ENTRAIDE CONCUE PAR DES AFRICAINS POUR L'AFRIQUE</marquee></h3>#}
+				<form class="login100-form validate-form" method="post" action=".">
+{#                    <h3 style="margin-top: -5px;margin-bottom: -10px; font-style: oblique; text-align: center"><marquee direction = "left">KOLIA - CI, VOTRE PLATEFORME D'ENTRAIDE CONCUE PAR DES AFRICAINS POUR L'AFRIQUE</marquee></h3>#}
+                    {% csrf_token %}
+					<span class="login100-form-title" style="margin-top: -50px; margin-bottom: -50px; color: white">
+						Inscription
+					</span>
+                        {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors  %}
+                                <div class="p-2 text-center text-danger rounded-xl" style="margin-top: -20px">
+                                    <p class="text-center text-danger" style="font-weight: bold; color: red">{{ error|escape}}</p>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% for error in form.non_field_errors %}
+                            <div class="p-2 text-center text-danger rounded-xl">
+                                <p class="text-center text-danger" style="font-weight: bold; color: red">{{ error|escape}}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+					<div class="wrap-input100 validate-input" data-validate = "Nom et Prénoms requient !!">
+						<input class="input100" type="text" name="nom" placeholder="Nom et Prénoms">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Contact requit : +225 xx xx xx xx xx">
+						<input class="input100 CONTACT" type="tel" name="contact1" placeholder="Contact">
+						<span class="focus-input100"></span>
+{#						<span class="symbol-input100">#}
+{#							<i class="fa fa-phone" aria-hidden="true"></i>#}
+{#						</span>#}
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Nom Utilisateur Requit">
+						<input class="input100" type="text" name="username" placeholder="Nom Utilisateur">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user-circle" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Adresse email requise: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Mot de Passe">
+						<input class="input100" type="password" name="password1" placeholder="Mot de Passe">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Confirmer votre Mot de Passe">
+						<input class="input100" type="password" name="password2" placeholder="Confirmer mot de Passe">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Inscription
+						</button>
+					</div>
+
+{#					<div class="text-center p-t-12">#}
+{#						<span class="txt1">#}
+{#							Forgot#}
+{#						</span>#}
+{#						<a class="txt2" href="#">#}
+{#							Username / Password?#}
+{#						</a>#}
+{#					</div>#}
+
+					<div class="text-center p-t-136" style="color: white">
+                        Déjà inscrit ?
+						<a class="btn btn-info" style="border-radius: 30px" href="{% url 'parametres:connexion' %}">
+							Connexion
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'form-v1/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'form-v1/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'form-v1/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'form-v1/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'form-v1/vendor/tilt/tilt.jquery.min.js' %}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'form-v1/js/main.js' %}"></script>
+
+    <script src="{% static 'js/intlTelInput.js' %}"></script>
+    <script src="https://shipping.pankart.store/resources/views/pages/js/intlTelInput.js"></script>
+    <script>
+        var elem = document.querySelector(".CONTACT");
+
+        window.intlTelInput(elem, {
+            autoHideDialCode: false,
+            separateDialCode: false,
+            nationalMode: false,
+            utilsScript: "{% static 'js/utils.js' %}",
+        });
+    </script>
+
+</body>
+</html>

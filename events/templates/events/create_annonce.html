@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+    Créer Annonce
+{% endblock %}
+{% block content %}
+    <main class="create-room layout">
+        <div class="container">
+          <div class="layout__box">
+            <div class="layout__boxHeader">
+              <div class="layout__boxTitle">
+                <a href="{% url 'home' %}">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <title>arrow-left</title>
+                    <path
+                      d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                    </path>
+                  </svg>
+                </a>
+                <h3>Formulaire Annonce</h3>
+              </div>
+            </div>
+            <div class="layout__body">
+              <form class="form" action="" method="post">
+                  {% csrf_token %}
+
+                    <div class="form__group">
+                      <label for="room_sujet">Choisir une Catégorie</label>
+                        <input required value="{{ annonce.categorie.nom }}" type="text" name="categorie" list="evenement-list" />
+                        <datalist id="evenement-list">
+                            <select name="" id="room_sujet">
+                                {% for evenement in evenements %}
+                                    <option value="{{ evenement.nom }}">{{ evenement.nom }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </datalist>
+                    </div>
+
+
+                    <div class="form__group">
+                      <label for="room_titre">Titre</label>
+                        {{ form.titre }}
+                    </div>
+                    {% if annonce.categorie.nom == "DÉCÈS" %}
+                        <div class="form__group">
+                          <label for="room_titre">Date décès</label>
+                            {% render_field form.date type="date" class="form-control" %}
+    {#                        {% if d_date %}#}
+    {#                            {% render_field form.date class="form-control"  cols="4" rows="4" placeholder="aaaa-mm-jj" %}#}
+    {#                            <span class="dob_error text-danger"></span>#}
+    {#                        {% else %}#}
+    {#                            {% render_field form.date type="date" class="form-control" %}#}
+    {#                        {% endif %}#}
+
+                        </div>
+                    {% else %}
+                        <div class="form__group">
+                          <label for="room_titre">Date Mariage</label>
+                            {% render_field form.date type="date" class="form-control" %}
+    {#                        {% if d_date %}#}
+    {#                            {% render_field form.date class="form-control"  cols="4" rows="4" placeholder="aaaa-mm-jj" %}#}
+    {#                            <span class="dob_error text-danger"></span>#}
+    {#                        {% else %}#}
+    {#                            {% render_field form.date type="date" class="form-control" %}#}
+    {#                        {% endif %}#}
+
+                        </div>
+                    {% endif %}
+                    <div class="form__group">
+                      <label for="room_description">Programme</label>
+                        {{ form.programme }}
+                    </div>
+                    <div class="form__group">
+                       <label for="room_description">Faire Part</label>
+                        {{ form.carte_annonce }}
+                    </div>
+                    {% if annonce.categorie.nom == 'DÉCÈS'  %}
+                        <div class="form__group">
+                           <label for="room_description">Faire Part</label>
+                            {{ form.carte_annonce }}
+                        </div>
+                    {% endif %}
+                <div class="form__action">
+                  <a class="btn btn--dark" href="{% url 'home' %}">Annuler</a>
+                  <button class="btn btn--main" type="submit">Enregistrer</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </main>
+{% endblock %}

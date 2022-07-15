@@ -1,0 +1,56 @@
+{% extends "base1.html" %}
+
+{% block container %}
+<div class="row centered-form" style="text-align: center">
+  <div class="col-sm-8 offset-2">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title text-center">
+            Confirmer Votre Contact pour Vérification
+        </h3>
+      </div>
+      <div class="card-body text-center">
+        <form class="text-center" role="form" method="POST">
+          {% csrf_token %}
+
+          {{ form.non_field_errors }}
+          {{ form.phone_number.errors }}
+          {{ form.via.errors }}
+
+          <div class="row text-center">
+            <div class="wrap-input100 validate-input" data-validate = "Contact requit : +225 xx xx xx xx xx">
+                {{ form.via }}
+                <input class="input100" type="tel" id="intl_phone_number" placeholder="Contact">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+{#                    <i class="fa fa-phone" aria-hidden="true"></i>#}
+                </span>
+            </div>
+{#            <input type="tel" id="intl_phone_number" class="form-control" />#}
+          </div>
+
+          <input type="submit" value="Suivant" class="btn btn-info btn-block">
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+    const phoneInputField = document.querySelector("#intl_phone_number");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        separateDialCode: true,
+        hiddenInput: "phone_number",
+        autoHideDialCode: false,
+            {#separateDialCode: false,#}
+        nationalMode: false,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.11/js/utils.js"
+        {#utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.min.js"#}
+        });
+</script>
+{% endblock %}
+
+{#{% block header %}#}
+{#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css" />#}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"></script>#}
+{#{% endblock %}#}

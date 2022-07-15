@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'style/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'style/intlTelInput.css' %}" />
+    <title>Koliac | {% block title %}{% endblock %}</title>
+  </head>
+
+  <body>
+    {% include '_partials/navbar.html' %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/intlTelInput.js' %}"></script>
+    <script src="https://shipping.pankart.store/resources/views/pages/js/intlTelInput.js"></script>
+    <script>
+        var elem = document.querySelector(".CONTACT");
+
+        window.intlTelInput(elem, {
+            autoHideDialCode: false,
+            separateDialCode: false,
+            nationalMode: false,
+            utilsScript: "{% static 'js/utils.js' %}",
+        });
+    </script>
+  </body>
+</html>

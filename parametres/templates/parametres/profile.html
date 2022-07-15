@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user.username }}
+{% endblock %}
+
+{% block content %}
+    <main class="profile-page layout layout--3">
+        <div class="container">
+        <!-- Topics Start -->
+            {% include 'events/categorie_component.html' %}
+        <!-- Topics End -->
+
+        <!-- Room List Start -->
+        <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              {% if user.image %}
+                <img src="{{ user.image.url }}" />
+              {% else %}
+                  <img src="https://randomuser.me/api/portraits/men/11.jpg" />
+              {% endif %}
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{ user.username }}</h3>
+            <p>@{{ user.username }}</p>
+            {% if user.contact1 %}
+                <p>{{ user.contact1 }}</p>
+            {% endif %}
+            {% if user == request.user %}
+                <a href="{% url 'parametres:edit_user' %}" class="btn btn--main btn--pill">Modifier Profile</a>
+            {% endif %}
+          </div>
+          <div class="profile__about">
+            <h3>A Propos</h3>
+            <p>{{ user.bio }}</p>
+          </div>
+        </div>
+        <div class="roomList__header">
+          <div>
+{#            <h2>Study Rooms Hosted by dennis_ivy</a>#}
+            </h2>
+          </div>
+        </div>
+            {% include 'events/feeds_component.html' %}
+        </div>
+        <!-- Room List End -->
+
+        <!-- Activities Start -->
+            {% include 'events/activity_component.html' %}
+        <!-- Activities End -->
+    </div>
+</main>
+{% endblock %}
